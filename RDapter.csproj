@@ -9,7 +9,7 @@
     <Authors>Chanvut Booneid</Authors>
     <Product>RDapter</Product>
     <Nullable>Enable</Nullable>
-    <Description>An Relational database extension aDapter , minimal and efficient Micro-ORM.</Description>
+    <Description>A Relational database extension aDapter. A minimal, high performance micro-orm.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
