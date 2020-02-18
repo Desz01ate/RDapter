@@ -1,0 +1,445 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RDapter</name>
+    </assembly>
+    <members>
+        <member name="T:RDapter.DataBuilder.Converter`1">
+            <summary>
+            alternative to reflection builder with MUCH better on performance, implementation taken from https://stackoverflow.com/questions/19841120/generic-dbdatareader-to-listt-mapping/19845980#19845980
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:RDapter.DataBuilder.Helper.DataReader.RowBuilder(System.Data.IDataReader)">
+            <summary>
+            Convert IDataReader into dynamic object.
+            </summary>
+            <param name="row">data reader to convert to dynamic object</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.DataBuilder.Helper.List.AsList``1(System.Collections.Generic.IEnumerable{``0})">
+            Implementation of Dapper's AsList (https://github.com/StackExchange/Dapper/blob/master/Dapper/SqlMapper.cs) Licensed as http://www.apache.org/licenses/LICENSE-2.0
+            <summary>
+            Obtains the data as a list; if it is *already* a list, the original object is returned without
+            any duplication; otherwise, ToList() is invoked.
+            </summary>
+            <typeparam name="T">The type of element in the list.</typeparam>
+            <param name="source">The enumerable to return as a list.</param>
+        </member>
+        <member name="T:RDapter.Entities.DatabaseParameter">
+            <summary>
+            Provide an abstract layer for IDbParameter for using in a non-generic environment.
+            </summary>
+        </member>
+        <member name="F:RDapter.Entities.DatabaseParameter.ParameterName">
+            <summary>
+            Name of parameter;
+            </summary>
+        </member>
+        <member name="P:RDapter.Entities.DatabaseParameter.Value">
+            <summary>
+            Value of parameter;
+            </summary>
+        </member>
+        <member name="F:RDapter.Entities.DatabaseParameter.Direction">
+            <summary>
+            Direction of parameter;
+            </summary>
+        </member>
+        <member name="P:RDapter.Entities.DatabaseParameter.DbType">
+            <summary>
+            Get the <seealso cref="T:System.Data.DbType"/> of the parameter, this property is currently not allow to set.
+            </summary>
+        </member>
+        <member name="M:RDapter.Entities.DatabaseParameter.#ctor(System.String,System.Object)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="parameterName">Name of parameter</param>
+            <param name="value">Value of parameter</param>
+        </member>
+        <member name="M:RDapter.Entities.DatabaseParameter.#ctor(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="parameterName">Name of parameter</param>
+            <param name="value">Value of parameter</param>
+            <param name="direction">Direction of parameter</param>
+        </member>
+        <member name="T:RDapter.Entities.ExecutionCommand">
+            <summary>
+            Contains execute command definition.
+            </summary>
+        </member>
+        <member name="P:RDapter.Entities.ExecutionCommand.CommandText">
+            <summary>
+            The command text.
+            </summary>
+        </member>
+        <member name="P:RDapter.Entities.ExecutionCommand.Parameters">
+            <summary>
+            The parameters related to query parameterized parameters.
+            </summary>
+        </member>
+        <member name="P:RDapter.Entities.ExecutionCommand.CommandType">
+            <summary>
+            Type of command.
+            </summary>
+        </member>
+        <member name="P:RDapter.Entities.ExecutionCommand.Transaction">
+            <summary>
+            Database transaction.
+            </summary>
+        </member>
+        <member name="P:RDapter.Entities.ExecutionCommand.Buffered">
+            <summary>
+            Should the execution be buffered.
+            </summary>
+        </member>
+        <member name="E:RDapter.Entities.ExecutionCommand.OnQueryReady">
+            <summary>
+            The event that will trigger when query is ready to execute.
+            </summary>
+        </member>
+        <member name="E:RDapter.Entities.ExecutionCommand.OnqueryExecuted">
+            <summary>
+            The event that will trigger when query is executed.
+            </summary>
+        </member>
+        <member name="M:RDapter.Entities.ExecutionCommand.#ctor(System.String)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="commandText"></param>
+        </member>
+        <member name="M:RDapter.Entities.ExecutionCommand.#ctor(System.String,System.Collections.Generic.IEnumerable{RDapter.Entities.DatabaseParameter},System.Data.CommandType,System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="commandText"></param>
+        </member>
+        <member name="T:RDapter.Entities.InternalPropertyInfo">
+            <summary>
+            Proxy for PropertyInfo for customizable property for internal use only.
+            </summary>
+        </member>
+        <member name="T:RDapter.Events.ExecutionCommandEvents">
+            <summary>
+            Contains event delegate signature for ExecutionCommand.
+            </summary>
+        </member>
+        <member name="T:RDapter.Events.ExecutionCommandEvents.OnQueryReadyEventHandler">
+            <summary>
+            The event that will trigger when query is ready to execute.
+            </summary>
+            <param name="sql"></param>
+            <param name="parameters"></param>
+        </member>
+        <member name="T:RDapter.Events.ExecutionCommandEvents.OnQueryExecutedEventHandler">
+            <summary>
+            The event that will trigger when query is executed.
+            </summary>
+            <param name="affectedRows"></param>
+        </member>
+        <member name="T:RDapter.Mapper">
+            <summary>
+            Default mapper execute-methods collection.
+            </summary>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReader``1(System.Data.Common.DbConnection,System.String,System.Object,System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="buffered">Whether to buffered result in memory.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReader``1(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="Connection">Database connection.</param>
+            <param name="execCommand">Execute command definition.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReader(System.Data.Common.DbConnection,System.String,System.Object,System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of dynamic object
+            </summary>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether to buffered result in memory.</param>
+            <returns>IEnumerable of dynamic object</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReader(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of dynamic object
+            </summary>
+            <param name="executionCommand">The execution command.</param>
+            <returns>IEnumerable of dynamic object</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteScalar``1(System.Data.Common.DbConnection,System.String,System.Object,System.Data.Common.DbTransaction,System.Data.CommandType)">
+            <summary>
+            Execute SELECT SQL query and return a scalar object
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteScalar``1(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand)">
+            <summary>
+            Execute SELECT SQL query and return a scalar object
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="executionCommand">The execution command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteNonQuery(System.Data.Common.DbConnection,System.String,System.Object,System.Data.Common.DbTransaction,System.Data.CommandType)">
+            <summary>
+            Execute any non-DML SQL Query
+            </summary>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteNonQuery(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand)">
+            <summary>
+            Execute any non-DML SQL Query
+            </summary>
+            <param name="executionCommand">The execution command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsync``1(System.Data.Common.DbConnection,System.String,System.Object,System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether to buffered result in memory.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsync``1(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="executionCommand">The execution command.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsync(System.Data.Common.DbConnection,System.String,System.Object,System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of dynamic object
+            </summary>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="transaction"></param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="buffered">Whether to buffered result in memory.</param>
+            <returns>IEnumerable of dynamic object</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsync(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of dynamic object
+            </summary>
+            <param name="executionCommand">The execution command.</param>
+            <returns>IEnumerable of dynamic object</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteScalarAsync``1(System.Data.Common.DbConnection,System.String,System.Object,System.Data.Common.DbTransaction,System.Data.CommandType)">
+            <summary>
+            Execute SELECT SQL query and return a scalar object
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteScalarAsync``1(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand)">
+            <summary>
+            Execute SELECT SQL query and return a scalar object
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="executionCommand">The execution command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteNonQueryAsync(System.Data.Common.DbConnection,System.String,System.Object,System.Data.Common.DbTransaction,System.Data.CommandType)">
+            <summary>
+            Execute any non-DML SQL Query
+            </summary>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteNonQueryAsync(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand)">
+            <summary>
+            Execute any non-DML SQL Query
+            </summary>
+            <param name="executionCommand">The execution command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteScalar(System.Data.Common.DbConnection,System.String,System.Object,System.Data.Common.DbTransaction,System.Data.CommandType)">
+            <summary>
+            Execute SELECT SQL query and return a string
+            </summary>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteScalar(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand)">
+            <summary>
+            Execute SELECT SQL query and return a string
+            </summary>
+            <param name="executionCommand">The execution command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteScalarAsync(System.Data.Common.DbConnection,System.String,System.Object,System.Data.Common.DbTransaction,System.Data.CommandType)">
+            <summary>
+            Execute SELECT SQL query and return a string in asynchronous manner
+            </summary>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteScalarAsync(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand)">
+            <summary>
+            Execute SELECT SQL query and return a string in asynchronous manner
+            </summary>
+            <param name="executionCommand">The execution command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsDataTable(System.Data.Common.DbConnection,System.String,System.Object,System.Data.Common.DbTransaction,System.Data.CommandType)">
+            <summary>
+            Execute SELECT SQL query and return DataTable
+            </summary>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsDataTable(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand)">
+            <summary>
+            Execute SELECT SQL query and return DataTable
+            </summary>
+            <param name="executionCommand">The execution command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsDataTableAsync(System.Data.Common.DbConnection,System.String,System.Object,System.Data.Common.DbTransaction,System.Data.CommandType)">
+            <summary>
+            Execute SELECT SQL query and return DataTable in an asynchronous manner
+            </summary>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsDataTableAsync(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand)">
+            <summary>
+            Execute SELECT SQL query and return DataTable in an asynchronous manner
+            </summary>
+            <param name="executionCommand">The execution command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReader``2(System.Data.Common.DbConnection,System.String,System.Func{``0,``1,``0},System.Collections.Generic.IEnumerable{RDapter.Entities.DatabaseParameter},System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="map">Map function.</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="buffered">Whether to buffered result in memory.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReader``3(System.Data.Common.DbConnection,System.String,System.Func{``0,``1,``2,``0},System.Collections.Generic.IEnumerable{RDapter.Entities.DatabaseParameter},System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="map">Map function.</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="buffered">Whether to buffered result in memory.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReader``4(System.Data.Common.DbConnection,System.String,System.Func{``0,``1,``2,``3,``0},System.Collections.Generic.IEnumerable{RDapter.Entities.DatabaseParameter},System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="map">Map function.</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="buffered">Whether to buffered result in memory.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsync``2(System.Data.Common.DbConnection,System.String,System.Func{``0,``1,``0},System.Collections.Generic.IEnumerable{RDapter.Entities.DatabaseParameter},System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="map">Map function.</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="buffered">Whether to buffered result in memory.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsync``3(System.Data.Common.DbConnection,System.String,System.Func{``0,``1,``2,``0},System.Collections.Generic.IEnumerable{RDapter.Entities.DatabaseParameter},System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="map">Map function.</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="buffered">Whether to buffered result in memory.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsync``4(System.Data.Common.DbConnection,System.String,System.Func{``0,``1,``2,``3,``0},System.Collections.Generic.IEnumerable{RDapter.Entities.DatabaseParameter},System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="map">Map function.</param>
+            <param name="parameters">SQL parameters according to the sql parameter.</param>
+            <param name="commandType">Type of SQL Command.</param>
+            <param name="buffered">Whether to buffered result in memory.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+    </members>
+</doc>

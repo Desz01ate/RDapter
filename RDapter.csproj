@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <LangVersion>8.0</LangVersion>
+    <Version>1.0.0.0</Version>
+    <PackageReleaseNotes>Release version.</PackageReleaseNotes>
+    <PackageId>RDapter</PackageId>
+    <Authors>Chanvut Booneid</Authors>
+    <Product>RDapter</Product>
+    <Nullable>Enable</Nullable>
+    <Description>An Relational database extension aDapter , minimal and efficient Micro-ORM.</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DocumentationFile>D:\Documents\GitHub\RDapter\RDapter.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Attributes\**" />
+    <EmbeddedResource Remove="Attributes\**" />
+    <None Remove="Attributes\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="DataBuilder\Helper\AttributeValidator.cs" />
+  </ItemGroup>
+
+</Project>
