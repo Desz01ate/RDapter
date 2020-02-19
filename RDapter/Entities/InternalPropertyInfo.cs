@@ -37,7 +37,8 @@ namespace RDapter.Entities
             {
                 if (string.IsNullOrWhiteSpace(_innerName))
                 {
-                    _innerName = Global.GetDefaultTypeMap(DeclaringType, _basePropertyInfo.Name);//_basePropertyInfo.FieldNameAttributeValidate();
+                    var constraint = Global.GetSchemaConstraint(DeclaringType);
+                    _innerName = constraint.GetField(_basePropertyInfo.Name).SqlName;//_basePropertyInfo.FieldNameAttributeValidate();
                 }
                 return _innerName;
             }

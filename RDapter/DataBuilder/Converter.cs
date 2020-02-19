@@ -32,13 +32,13 @@ namespace RDapter.DataBuilder
 
             //does int based lookup
             var indexerInfo = typeof(IDataRecord).GetProperty("Item", new[] { typeof(int) });
-
-            var columns = Enumerable.Range(0, _dataReader.FieldCount).Select(i => new { index = i, name = _dataReader.GetName(i), type = _dataReader.GetFieldType(i) });
+            var columns = Enumerable.Range(0, _dataReader.FieldCount).Select(i => new { index = i, name = _dataReader.GetName(i) });
             var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var column in columns)
             {
                 //var property = properties.FirstOrDefault(x => x.Name == column.name);
-                var property = properties.SingleOrDefault(x => column.name == Global.GetDefaultTypeMap<T>(x.Name) && column.type == x.PropertyType);
+                var constraint = Global.GetSchemaConstraint<T>();
+                var property = properties.SingleOrDefault(x => column.name == constraint.GetField(x.Name).SqlName);
                 if (property == null)
                     continue;
 

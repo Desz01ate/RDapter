@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDapter", "RDapter.csproj", "{1C11450B-6730-4667-85FA-59B6DAE2C682}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDapter.Extends", "RDapter.Extends\RDapter.Extends.csproj", "{7F4A9F0F-0C1F-4259-AB52-71CB63D8F1BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDapter.Extends", "..\RDapter.Extends\RDapter.Extends.csproj", "{7F4A9F0F-0C1F-4259-AB52-71CB63D8F1BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDapter.Test", "RDapper.Test\RDapter.Test.csproj", "{01259918-9B6D-4156-B41D-FE4D4BBC7AD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDapter.Test", "..\RDapper.Test\RDapter.Test.csproj", "{01259918-9B6D-4156-B41D-FE4D4BBC7AD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDapter.Runner", "RDapter.Runner\RDapter.Runner.csproj", "{F1DF4B64-C00B-48B2-AFD0-2B7D30D77B4F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDapter", "RDapter\RDapter.csproj", "{DAF1024E-6271-44CE-8969-DC72712D6A86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1C11450B-6730-4667-85FA-59B6DAE2C682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C11450B-6730-4667-85FA-59B6DAE2C682}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C11450B-6730-4667-85FA-59B6DAE2C682}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C11450B-6730-4667-85FA-59B6DAE2C682}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7F4A9F0F-0C1F-4259-AB52-71CB63D8F1BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7F4A9F0F-0C1F-4259-AB52-71CB63D8F1BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F4A9F0F-0C1F-4259-AB52-71CB63D8F1BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +25,14 @@ Global
 		{01259918-9B6D-4156-B41D-FE4D4BBC7AD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01259918-9B6D-4156-B41D-FE4D4BBC7AD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01259918-9B6D-4156-B41D-FE4D4BBC7AD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1DF4B64-C00B-48B2-AFD0-2B7D30D77B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1DF4B64-C00B-48B2-AFD0-2B7D30D77B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1DF4B64-C00B-48B2-AFD0-2B7D30D77B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1DF4B64-C00B-48B2-AFD0-2B7D30D77B4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAF1024E-6271-44CE-8969-DC72712D6A86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAF1024E-6271-44CE-8969-DC72712D6A86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAF1024E-6271-44CE-8969-DC72712D6A86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAF1024E-6271-44CE-8969-DC72712D6A86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

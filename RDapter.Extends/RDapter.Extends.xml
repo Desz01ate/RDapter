@@ -1,0 +1,459 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RDapter.Extends</name>
+    </assembly>
+    <members>
+        <member name="M:RDapter.Extends.Builder.Evaluator.PartialEval(System.Linq.Expressions.Expression,System.Func{System.Linq.Expressions.Expression,System.Boolean})">
+            <summary>
+            Performs evaluation and replacement of independent sub-trees
+            </summary>
+            <param name="expression">The root of the expression tree.</param>
+            <param name="fnCanBeEvaluated">A function that decides whether a given expression node can be part of the local function.</param>
+            <returns>A new tree with sub-trees evaluated and replaced.</returns>
+        </member>
+        <member name="M:RDapter.Extends.Builder.Evaluator.PartialEval(System.Linq.Expressions.Expression)">
+            <summary>
+            Performs evaluation and replacement of independent sub-trees
+            </summary>
+            <param name="expression">The root of the expression tree.</param>
+            <returns>A new tree with sub-trees evaluated and replaced.</returns>
+        </member>
+        <member name="T:RDapter.Extends.Builder.Evaluator.SubtreeEvaluator">
+            <summary>
+            Evaluates and replaces sub-trees when first candidate is reached (top-down)
+            </summary>
+        </member>
+        <member name="T:RDapter.Extends.Builder.Evaluator.Nominator">
+            <summary>
+            Performs bottom-up analysis to determine which nodes can possibly
+            be part of an evaluated sub-tree.
+            </summary>
+        </member>
+        <member name="T:RDapter.Extends.Builder.ExpressionTranslator`1">
+            <summary>
+            Provide expression tree translation service using visitor pattern.
+            </summary>
+            <typeparam name="TObject"></typeparam>
+        </member>
+        <member name="M:RDapter.Extends.Builder.ExpressionTranslator`1.VisitBinary(System.Linq.Expressions.BinaryExpression)">
+             <summary>
+            
+             </summary>
+             <param name="b"></param>
+             <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.Query``1(System.Data.Common.DbConnection,System.Nullable{System.Int32},System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select all rows from table (table name is a class name or specific [Table] attribute, an attribute has higher priority).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="top">Specified TOP(n) rows.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.Query``1(System.Data.Common.DbConnection,System.Object,System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select one row from table from given primary key (primary key can be set by [PrimaryKey] attribute, table name is a class name or specific [Table] attribute, an attribute has higher priority).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="primaryKey">Primary key of specific row</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns>Object of given class</returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.QueryFirst``1(System.Data.Common.DbConnection,System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select first row from table.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns>Object of given class</returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.QueryFirst``1(System.Data.Common.DbConnection,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select first row from table by using matched predicate.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="predicate">Predicate of data in LINQ manner</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns>Object of given class</returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.Insert``1(System.Data.Common.DbConnection,``0,System.Data.Common.DbTransaction)">
+            <summary>
+            Insert row into table (table name is a class name or specific [Table] attribute, an attribute has higher priority).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="obj">Object to insert.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns>Affected row after an insert.</returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.InsertMany``1(System.Data.Common.DbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.Common.DbTransaction)">
+            <summary>
+            Insert rows into table (table name is a class name or specific [Table] attribute, an attribute has higher priority).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="obj">IEnumrable to insert.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns>Affected row after an insert.</returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.Update``1(System.Data.Common.DbConnection,``0,System.Data.Common.DbTransaction)">
+            <summary>
+            Update specific object into table (table name is a class name or specific [Table] attribute, an attribute has higher priority).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="obj">Object to update.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns>Affected row after an update.</returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.Delete``1(System.Data.Common.DbConnection,``0,System.Data.Common.DbTransaction)">
+            <summary>
+            Delete given object from table by inference of [PrimaryKey] attribute. (table name is a class name or specific [Table] attribute, an attribute has higher priority).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="obj"></param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.QueryAsync``1(System.Data.Common.DbConnection,System.Nullable{System.Int32},System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select all rows from table (table name is a class name or specific [Table] attribute, an attribute has higher priority).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="top">Specified TOP(n) rows.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns>IEnumerable of object</returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.QueryAsync``1(System.Data.Common.DbConnection,System.Object,System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select one row from table from given primary key (primary key can be set by [PrimaryKey] attribute, table name is a class name or specific [Table] attribute, an attribute has higher priority).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="primaryKey">Primary key of specific row</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns>Object of given class</returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.QueryFirstAsync``1(System.Data.Common.DbConnection,System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select first row from table.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns>Object of given class</returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.QueryFirstAsync``1(System.Data.Common.DbConnection,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select first row from table by using matched predicate.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="predicate">Predicate of data in LINQ manner</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns>Object of given class</returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.InsertAsync``1(System.Data.Common.DbConnection,``0,System.Data.Common.DbTransaction)">
+            <summary>
+            Insert row into table (table name is a class name or specific [Table] attribute, an attribute has higher priority).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="obj">Object to insert.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns>Affected row after an insert.</returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.InsertManyAsync``1(System.Data.Common.DbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.Common.DbTransaction)">
+            <summary>
+            Insert rows into table (table name is a class name or specific [Table] attribute, an attribute has higher priority).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="obj">Object to insert.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns>Affected row after an insert.</returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.UpdateAsync``1(System.Data.Common.DbConnection,``0,System.Data.Common.DbTransaction)">
+            <summary>
+            Update specific object into table (table name is a class name or specific [Table] attribute, an attribute has higher priority).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="obj">Object to update.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns>Affected row after an update.</returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.DeleteAsync``1(System.Data.Common.DbConnection,``0,System.Data.Common.DbTransaction)">
+            <summary>
+            Delete given object from table by inference of [PrimaryKey] attribute. (table name is a class name or specific [Table] attribute, an attribute has higher priority).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="obj"></param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.Query``1(System.Data.Common.DbConnection,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Nullable{System.Int32},System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select data from table by using matched predicate
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="predicate">Predicate of data in LINQ manner</param>
+            <param name="top">Specified TOP(n) rows.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.Delete``1(System.Data.Common.DbConnection,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Data.Common.DbTransaction)">
+            <summary>
+            Delete data from table by using matched predicate
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="predicate">Predicate of data in LINQ manner</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.QueryAsync``1(System.Data.Common.DbConnection,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Nullable{System.Int32},System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select data from table by using matched predicate
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="predicate">Predicate of data in LINQ manner</param>
+            <param name="top">Specified TOP(n) rows.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.DeleteAsync``1(System.Data.Common.DbConnection,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Data.Common.DbTransaction)">
+            <summary>
+            Select data from table by using matched predicate
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="predicate">Predicate of data in LINQ manner</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.Delete``1(System.Data.Common.DbConnection,System.Object,System.Data.Common.DbTransaction)">
+            <summary>
+            Select data from table by using primary key
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="primaryKey">Specified primary key.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.DeleteAsync``1(System.Data.Common.DbConnection,System.Object,System.Data.Common.DbTransaction)">
+            <summary>
+            Select data from table by using primary key
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="primaryKey">Specified primary key.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.Count``1(System.Data.Common.DbConnection)">
+            <summary>
+            Returns rows count from specified table.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.CountAsync``1(System.Data.Common.DbConnection)">
+            <summary>
+            Returns rows count from specified table in an asynchronous manner.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.Count``1(System.Data.Common.DbConnection,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Returns rows count on specific condition from specified table.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.CountAsync``1(System.Data.Common.DbConnection,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Returns rows count on specific condition from specified table in an asynchronous manner.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.QueryOffset``1(System.Data.Common.DbConnection,System.Int32,System.Int32,System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select rows from table by skipping rows by specified offset and take limit rows (SQL Server syntax).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="offset">The amount of rows to be offset (skip).</param>
+            <param name="limit">The amount of rows to be take.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.QueryOffset``1(System.Data.Common.DbConnection,System.String,System.Int32,System.Int32,System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select rows from table by skipping rows by specified offset and take limit rows (SQL Server syntax).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="orderBy">Order by column.</param>
+            <param name="offset">The amount of rows to be offset (skip).</param>
+            <param name="limit">The amount of rows to be take.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.QueryOffsetAsync``1(System.Data.Common.DbConnection,System.Int32,System.Int32,System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select rows from table by skipping rows by specified offset and take limit rows (SQL Server syntax).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="offset">The amount of rows to be offset (skip).</param>
+            <param name="limit">The amount of rows to be take.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.QueryOffsetAsync``1(System.Data.Common.DbConnection,System.String,System.Int32,System.Int32,System.Data.Common.DbTransaction,System.Boolean)">
+            <summary>
+            Select rows from table by skipping rows by specified offset and take limit rows (SQL Server syntax).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="orderBy">Order by column.</param>
+            <param name="offset">The amount of rows to be offset (skip).</param>
+            <param name="limit">The amount of rows to be take.</param>
+            <param name="transaction">Transaction for current execution.</param>
+            <param name="buffered">Whether the data should be cached in memory.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.CreateTable``1(System.Data.Common.DbConnection,System.Data.Common.DbTransaction)">
+            <summary>
+            Create table from model object.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.CrudMapper.CreateTableAsync``1(System.Data.Common.DbConnection,System.Data.Common.DbTransaction)">
+            <summary>
+            Create table from model object in an asynchronous manner.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RDapter.Extends.Helper.QueryGenerate">
+            <summary>
+            Provide extension for SQL generate.
+            </summary>
+        </member>
+        <member name="M:RDapter.Extends.Helper.QueryGenerate.SelectQueryGenerate``1(System.Data.Common.DbConnection,System.Nullable{System.Int32})">
+            <summary>
+            Generate SQL query with sql parameters.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="top"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.Helper.QueryGenerate.SelectQueryGenerate``1(System.Data.Common.DbConnection,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Nullable{System.Int32})">
+            <summary>
+            Generate SQL query with sql parameters.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="predicate"></param>
+            <param name="top"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.Helper.QueryGenerate.SelectQueryGenerate``1(System.Data.Common.DbConnection,System.Object)">
+            <summary>
+            Generate SQL query with sql parameters.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="primaryKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.Helper.QueryGenerate.InsertQueryGenerate``1(System.Data.Common.DbConnection,``0)">
+            <summary>
+            Generate SQL query with sql parameters.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.Helper.QueryGenerate.InsertQueryGenerate``1(System.Data.Common.DbConnection,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Generate SQL query with sql parameters.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.Helper.QueryGenerate.UpdateQueryGenerate``1(System.Data.Common.DbConnection,``0)">
+            <summary>
+            Generate SQL query with sql parameters.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.Helper.QueryGenerate.DeleteQueryGenerate``1(System.Data.Common.DbConnection,``0)">
+            <summary>
+            Generate SQL query with sql parameters.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.Helper.QueryGenerate.DeleteQueryGenerate``1(System.Data.Common.DbConnection,System.Object)">
+            <summary>
+            Generate SQL query with sql parameters.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="primaryKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.Helper.QueryGenerate.DeleteQueryGenerate``1(System.Data.Common.DbConnection,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Generate SQL query with sql parameters.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RDapter.Extends.Helper.QueryGenerate.GenerateCreateTableStatement``1(System.Data.Common.DbConnection)">
+            <summary>
+            Generate SQL create table query.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="connector"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
