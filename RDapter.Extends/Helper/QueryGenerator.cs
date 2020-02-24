@@ -21,7 +21,7 @@ namespace RDapter.Extends.Helper
         /// <typeparam name="T"></typeparam>
         /// <param name="top"></param>
         /// <returns></returns>
-        public static string SelectQueryGenerate<T>(this DbConnection connector, int? top = null)
+        internal static string SelectQueryGenerate<T>(this DbConnection connector, int? top = null)
             where T : class
         {
             var tableName = RDapter.Global.GetSchemaConstraint<T>().TableName;
@@ -36,7 +36,7 @@ namespace RDapter.Extends.Helper
         /// <param name="predicate"></param>
         /// <param name="top"></param>
         /// <returns></returns>
-        public static (string query, IEnumerable<DatabaseParameter> parameters) SelectQueryGenerate<T>(this DbConnection connector, Expression<Func<T, bool>> predicate, int? top = null)
+        internal static (string query, IEnumerable<DatabaseParameter> parameters) SelectQueryGenerate<T>(this DbConnection connector, Expression<Func<T, bool>> predicate, int? top = null)
             where T : class
         {
             var tableName = RDapter.Global.GetSchemaConstraint<T>().TableName;
@@ -52,7 +52,7 @@ namespace RDapter.Extends.Helper
         /// <typeparam name="T"></typeparam>
         /// <param name="primaryKey"></param>
         /// <returns></returns>
-        public static (string query, IEnumerable<DatabaseParameter> parameters) SelectQueryGenerate<T>(this DbConnection connector, object primaryKey)
+        internal static (string query, IEnumerable<DatabaseParameter> parameters) SelectQueryGenerate<T>(this DbConnection connector, object primaryKey)
             where T : class
         {
             var constraint = RDapter.Global.GetSchemaConstraint<T>();
@@ -69,7 +69,7 @@ namespace RDapter.Extends.Helper
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static (string query, IEnumerable<DatabaseParameter> parameters) InsertQueryGenerate<T>(this DbConnection connector, T obj)
+        internal static (string query, IEnumerable<DatabaseParameter> parameters) InsertQueryGenerate<T>(this DbConnection connector, T obj)
             where T : class
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
@@ -89,7 +89,7 @@ namespace RDapter.Extends.Helper
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static (string query, IEnumerable<DatabaseParameter> parameters) InsertQueryGenerate<T>(this DbConnection connector, IEnumerable<T> source)
+        internal static (string query, IEnumerable<DatabaseParameter> parameters) InsertQueryGenerate<T>(this DbConnection connector, IEnumerable<T> source)
             where T : class
         {
             var tableName = RDapter.Global.GetSchemaConstraint<T>().TableName;
@@ -127,7 +127,7 @@ namespace RDapter.Extends.Helper
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static (string query, IEnumerable<DatabaseParameter> parameters) UpdateQueryGenerate<T>(this DbConnection connector, T obj)
+        internal static (string query, IEnumerable<DatabaseParameter> parameters) UpdateQueryGenerate<T>(this DbConnection connector, T obj)
             where T : class
         {
             var constraint = RDapter.Global.GetSchemaConstraint<T>();
@@ -163,7 +163,7 @@ namespace RDapter.Extends.Helper
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static (string query, IEnumerable<DatabaseParameter> parameters) DeleteQueryGenerate<T>(this DbConnection connector, T obj)
+        internal static (string query, IEnumerable<DatabaseParameter> parameters) DeleteQueryGenerate<T>(this DbConnection connector, T obj)
             where T : class
         {
             var constraint = RDapter.Global.GetSchemaConstraint<T>();
@@ -184,7 +184,7 @@ namespace RDapter.Extends.Helper
         /// <typeparam name="T"></typeparam>
         /// <param name="primaryKey"></param>
         /// <returns></returns>
-        public static (string query, IEnumerable<DatabaseParameter> parameters) DeleteQueryGenerate<T>(this DbConnection connector, object primaryKey)
+        internal static (string query, IEnumerable<DatabaseParameter> parameters) DeleteQueryGenerate<T>(this DbConnection connector, object primaryKey)
             where T : class
         {
             var constraint = RDapter.Global.GetSchemaConstraint<T>();
@@ -204,7 +204,7 @@ namespace RDapter.Extends.Helper
         /// <typeparam name="T"></typeparam>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public static (string query, IEnumerable<DatabaseParameter> parameters) DeleteQueryGenerate<T>(this DbConnection connector, Expression<Func<T, bool>> predicate)
+        internal static (string query, IEnumerable<DatabaseParameter> parameters) DeleteQueryGenerate<T>(this DbConnection connector, Expression<Func<T, bool>> predicate)
             where T : class
         {
             var tableName = RDapter.Global.GetSchemaConstraint<T>().TableName;
@@ -219,7 +219,7 @@ namespace RDapter.Extends.Helper
         /// <typeparam name="T"></typeparam>
         /// <param name="connector"></param>
         /// <returns></returns>
-        public static string GenerateCreateTableStatement<T>(this DbConnection connector)
+        internal static string GenerateCreateTableStatement<T>(this DbConnection connector)
             where T : class
         {
             //throw new NotImplementedException();

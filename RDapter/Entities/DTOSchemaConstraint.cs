@@ -48,7 +48,7 @@ namespace RDapter.Entities
         private bool applied { get; set; }
         public DTOSchemaConstraint SetTableName(string name)
         {
-            if (!string.IsNullOrWhiteSpace(_tableName)) throw new InvalidOperationException();
+            //if (!string.IsNullOrWhiteSpace(_tableName)) throw new InvalidOperationException();
             this.TableName = name;
             return this;
         }
@@ -58,17 +58,23 @@ namespace RDapter.Entities
             SetField(name, name, false, false, true, autoIncrement, true);
             return this;
         }
-        public DTOSchemaConstraint SetField(string name, string sqlName, bool ignoreInsert = false, bool ignoreUpdate = false, bool isPrimaryKey = false, bool isAutoIncrement = false, bool isNotNull = false)
+        private DTOSchemaConstraint SetField(string name, string sqlName, bool ignoreInsert = false, bool ignoreUpdate = false, bool isPrimaryKey = false, bool isAutoIncrement = false, bool isNotNull = false)
         {
             if (_fields.Any(x => x.Name == name)) throw new InvalidOperationException();
             _fields.Add(new FieldConstraint(name, sqlName, ignoreInsert, ignoreUpdate, isPrimaryKey, isAutoIncrement, isNotNull));
+            return this;
+        }
+        public DTOSchemaConstraint SetField(string name, string sqlName, bool ignoreInsert = false, bool ignoreUpdate = false, bool isNotNull = false)
+        {
+            if (_fields.Any(x => x.Name == name)) throw new InvalidOperationException();
+            _fields.Add(new FieldConstraint(name, sqlName, ignoreInsert, ignoreUpdate, isNotNull: isNotNull));
             return this;
         }
         public FieldConstraint GetField(string name)
         {
             var field = _fields.SingleOrDefault(x => x.Name == name);
             if (field != null) return field;
-            SetField(name, name, false, false);
+            SetField(name, name, false, false, false);
             return GetField(name);
         }
         public DTOSchemaConstraint SetBindingFlags(BindingFlags bindingFlags)

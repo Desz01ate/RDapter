@@ -14,7 +14,7 @@ namespace RDapter.Runner
     public class Test
     {
         [Benchmark]
-        public List<taxifaretrain> Dapper()
+        public List<taxifaretrain> Dapper1()
         {
             using var connection = new SqlConnection("server=localhost;database=local;user=sa;password=sa;");
             var res = connection.Query<taxifaretrain>("SELECT TOP(10000) * FROM [taxi-fare-train]").AsList();
@@ -31,13 +31,13 @@ namespace RDapter.Runner
         [Benchmark]
         public List<taxifaretrain> RDapterExtends()
         {
-            RDapter.Global.SetSchemaConstraint<taxifaretrain>((constraint) =>
+            Global.SetSchemaConstraint<taxifaretrain>((constraint) =>
             {
-                constraint.SetTableName("[taxi-fare-train]");
+                //constraint.SetTableName("[taxi-fare-train]");
                 constraint.SetField(nameof(taxifaretrain.vendorid), "vendor_id", true, true);
             });
             using var connection = new SqlConnection("server=localhost;database=local;user=sa;password=sa;");
-            var res = RDapter.Extends.CrudMapper.Query<taxifaretrain>(connection, top: 10000).AsList();
+            var res = RDapter.Extends.Mapper.Query<taxifaretrain>(connection, top: 10000).AsList();
             return res;
         }
     }
@@ -47,22 +47,10 @@ namespace RDapter.Runner
         {
             RDapter.Global.SetSchemaConstraint<taxifaretrain>((constraint) =>
             {
-                constraint.SetTableName("[taxi-fare-train]");
                 constraint.SetField(nameof(taxifaretrain.vendorid), "vendor_id", true, true);
             });
             BenchmarkDotNet.Running.BenchmarkRunner.Run<Test>();
             return;
-
-            var connection = new SqlConnection("server=localhost;database=local;user=sa;password=sa;");
-            var res = connection.ExecuteReader<taxifaretrain>("SELECT TOP(10) * FROM [taxi-fare-train]");
-            //var res2 = connection.Query<taxifaretrain>(top: 10);
-            //var newobj = new taxifaretrain();
-            //connection.Insert(newobj);
-            //var update = connection.QueryFirst<taxifaretrain>(x => x.vendorid == null);
-            //update.vendorid = "BBBB";
-            //connection.Update(update);
-            //connection.Delete<taxifaretrain>(x => x.vendorid == null);
-            Console.ReadLine();
         }
     }
 }

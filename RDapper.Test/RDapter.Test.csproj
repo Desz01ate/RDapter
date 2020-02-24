@@ -24,4 +24,10 @@
     <ProjectReference Include="..\RDapter\RDapter.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Files\Local.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

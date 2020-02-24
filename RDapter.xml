@@ -96,16 +96,6 @@
             Should the execution be buffered.
             </summary>
         </member>
-        <member name="E:RDapter.Entities.ExecutionCommand.OnQueryReady">
-            <summary>
-            The event that will trigger when query is ready to execute.
-            </summary>
-        </member>
-        <member name="E:RDapter.Entities.ExecutionCommand.OnqueryExecuted">
-            <summary>
-            The event that will trigger when query is executed.
-            </summary>
-        </member>
         <member name="M:RDapter.Entities.ExecutionCommand.#ctor(System.String)">
             <summary>
             Ctor
@@ -117,29 +107,15 @@
             Ctor
             </summary>
             <param name="commandText"></param>
+            <param name="buffered"></param>
+            <param name="commandType"></param>
+            <param name="transaction"></param>
+            <param name="parameter"></param>
         </member>
         <member name="T:RDapter.Entities.InternalPropertyInfo">
             <summary>
             Proxy for PropertyInfo for customizable property for internal use only.
             </summary>
-        </member>
-        <member name="T:RDapter.Events.ExecutionCommandEvents">
-            <summary>
-            Contains event delegate signature for ExecutionCommand.
-            </summary>
-        </member>
-        <member name="T:RDapter.Events.ExecutionCommandEvents.OnQueryReadyEventHandler">
-            <summary>
-            The event that will trigger when query is ready to execute.
-            </summary>
-            <param name="sql"></param>
-            <param name="parameters"></param>
-        </member>
-        <member name="T:RDapter.Events.ExecutionCommandEvents.OnQueryExecutedEventHandler">
-            <summary>
-            The event that will trigger when query is executed.
-            </summary>
-            <param name="affectedRows"></param>
         </member>
         <member name="T:RDapter.Mapper">
             <summary>
@@ -367,59 +343,112 @@
             <summary>
             Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
             <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
             <param name="map">Map function.</param>
             <param name="parameters">SQL parameters according to the sql parameter.</param>
             <param name="commandType">Type of SQL Command.</param>
             <param name="buffered">Whether to buffered result in memory.</param>
             <param name="transaction">Transaction for current execution.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReader``2(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand,System.Func{``0,``1,``0})">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="map">Map function.</param>
+            <param name="Connection"></param>
+            <param name="executionCommand">The execution command.</param>
             <returns>IEnumerable of POCO</returns>
         </member>
         <member name="M:RDapter.Mapper.ExecuteReader``3(System.Data.Common.DbConnection,System.String,System.Func{``0,``1,``2,``0},System.Collections.Generic.IEnumerable{RDapter.Entities.DatabaseParameter},System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
             <summary>
             Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
             <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
             <param name="map">Map function.</param>
             <param name="parameters">SQL parameters according to the sql parameter.</param>
             <param name="commandType">Type of SQL Command.</param>
             <param name="buffered">Whether to buffered result in memory.</param>
             <param name="transaction">Transaction for current execution.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReader``3(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand,System.Func{``0,``1,``2,``0})">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="map">Map function.</param>
+            <param name="Connection"></param>
+            <param name="executionCommand">The execution command.</param>
             <returns>IEnumerable of POCO</returns>
         </member>
         <member name="M:RDapter.Mapper.ExecuteReader``4(System.Data.Common.DbConnection,System.String,System.Func{``0,``1,``2,``3,``0},System.Collections.Generic.IEnumerable{RDapter.Entities.DatabaseParameter},System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
             <summary>
             Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
             <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
             <param name="map">Map function.</param>
             <param name="parameters">SQL parameters according to the sql parameter.</param>
             <param name="commandType">Type of SQL Command.</param>
             <param name="buffered">Whether to buffered result in memory.</param>
             <param name="transaction">Transaction for current execution.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReader``4(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand,System.Func{``0,``1,``2,``3,``0})">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="map">Map function.</param>
+            <param name="Connection"></param>
+            <param name="executionCommand">The execution command.</param>
             <returns>IEnumerable of POCO</returns>
         </member>
         <member name="M:RDapter.Mapper.ExecuteReaderAsync``2(System.Data.Common.DbConnection,System.String,System.Func{``0,``1,``0},System.Collections.Generic.IEnumerable{RDapter.Entities.DatabaseParameter},System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
             <summary>
             Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
             <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
             <param name="map">Map function.</param>
             <param name="parameters">SQL parameters according to the sql parameter.</param>
             <param name="commandType">Type of SQL Command.</param>
             <param name="buffered">Whether to buffered result in memory.</param>
             <param name="transaction">Transaction for current execution.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsync``2(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand,System.Func{``0,``1,``0})">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="map">Map function.</param>
+            <param name="Connection"></param>
+            <param name="executionCommand">The execution command.</param>
             <returns>IEnumerable of POCO</returns>
         </member>
         <member name="M:RDapter.Mapper.ExecuteReaderAsync``3(System.Data.Common.DbConnection,System.String,System.Func{``0,``1,``2,``0},System.Collections.Generic.IEnumerable{RDapter.Entities.DatabaseParameter},System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
             <summary>
             Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
             <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
             <param name="map">Map function.</param>
             <param name="parameters">SQL parameters according to the sql parameter.</param>
@@ -428,17 +457,42 @@
             <param name="transaction">Transaction for current execution.</param>
             <returns>IEnumerable of POCO</returns>
         </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsync``3(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand,System.Func{``0,``1,``2,``0})">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="map">Map function.</param>
+            <param name="Connection"></param>
+            <param name="executionCommand">The execution command.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
         <member name="M:RDapter.Mapper.ExecuteReaderAsync``4(System.Data.Common.DbConnection,System.String,System.Func{``0,``1,``2,``3,``0},System.Collections.Generic.IEnumerable{RDapter.Entities.DatabaseParameter},System.Data.Common.DbTransaction,System.Data.CommandType,System.Boolean)">
             <summary>
             Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
             </summary>
-            <typeparam name="T"></typeparam>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
             <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
             <param name="map">Map function.</param>
             <param name="parameters">SQL parameters according to the sql parameter.</param>
             <param name="commandType">Type of SQL Command.</param>
             <param name="buffered">Whether to buffered result in memory.</param>
             <param name="transaction">Transaction for current execution.</param>
+            <returns>IEnumerable of POCO</returns>
+        </member>
+        <member name="M:RDapter.Mapper.ExecuteReaderAsync``4(System.Data.Common.DbConnection,RDapter.Entities.ExecutionCommand,System.Func{``0,``1,``2,``3,``0})">
+            <summary>
+            Execute SELECT SQL query and return IEnumerable of specified POCO that is matching with the query columns, this overload is suitable when you perform SELECT-JOIN query.
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+            <param name="sql">Any SELECT SQL that you want to perform with/without parameterized parameters (Do not directly put sql parameter in this parameter).</param>
+            <param name="map">Map function.</param>
+            <param name="Connection"></param>
+            <param name="executionCommand">The execution command.</param>
             <returns>IEnumerable of POCO</returns>
         </member>
     </members>

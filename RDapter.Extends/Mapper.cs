@@ -12,7 +12,10 @@ using RDapter.Extends.Helper;
 
 namespace RDapter.Extends
 {
-    public static partial class CrudMapper
+    /// <summary>
+    /// Default mapper execute-methods collection.
+    /// </summary>
+    public static partial class Mapper
     {
         /// <summary>
         /// Select all rows from table (table name is a class name or specific [Table] attribute, an attribute has higher priority).
@@ -537,7 +540,7 @@ namespace RDapter.Extends
             return int.Parse(countAsString);
         }
     }
-    public static partial class CrudMapper
+    public static partial class Mapper
     {
         /// <summary>
         /// Select rows from table by skipping rows by specified offset and take limit rows (SQL Server syntax).

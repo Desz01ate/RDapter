@@ -152,7 +152,6 @@ namespace RDapter.Test
             }
         }
 
-        [Test]
         public void SQLiteConnector()
         {
             using (var connection = new SQLiteConnection(_sqliteConnection))
