@@ -31,11 +31,6 @@ namespace RDapter.Runner
         [Benchmark]
         public List<taxifaretrain> RDapterExtends()
         {
-            Global.SetSchemaConstraint<taxifaretrain>((constraint) =>
-            {
-                //constraint.SetTableName("[taxi-fare-train]");
-                constraint.SetField(nameof(taxifaretrain.vendorid), "vendor_id", true, true);
-            });
             using var connection = new SqlConnection("server=localhost;database=local;user=sa;password=sa;");
             var res = RDapter.Extends.Mapper.Query<taxifaretrain>(connection, top: 10000).AsList();
             return res;
@@ -47,9 +42,14 @@ namespace RDapter.Runner
         {
             RDapter.Global.SetSchemaConstraint<taxifaretrain>((constraint) =>
             {
-                constraint.SetField(nameof(taxifaretrain.vendorid), "vendor_id", true, true);
+                //constraint.SetField(nameof(taxifaretrain.vendorid), "vendor_id", true, true);
+                constraint.SetTableName("[taxi-fare-train]");
+                constraint.SetField<taxifaretrain>(x => x.vendorid, "vendor_id");
             });
-            BenchmarkDotNet.Running.BenchmarkRunner.Run<Test>();
+            var constraint = RDapter.Global.GetSchemaConstraint<taxifaretrain>();
+            var test = new Test();
+            var res = test.RDapterExtends();
+            //BenchmarkDotNet.Running.BenchmarkRunner.Run<Test>();
             return;
         }
     }

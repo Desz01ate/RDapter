@@ -257,7 +257,7 @@ namespace RDapter.Extends
             var query = connector.SelectQueryGenerate<T>(predicate, 1);
             var ec = new ExecutionCommand(query.query, query.parameters, System.Data.CommandType.Text, transaction, buffered: buffered);
 
-            T result = (await connector.ExecuteReaderAsync(ec).ConfigureAwait(false)).FirstOrDefault();
+            T result = (await connector.ExecuteReaderAsync<T>(ec).ConfigureAwait(false)).FirstOrDefault();
             return result;
         }
         /// <summary>

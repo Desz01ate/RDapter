@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
@@ -52,10 +53,20 @@ namespace RDapter.Entities
             this.TableName = name;
             return this;
         }
-        public DTOSchemaConstraint SetPrimaryKey(string name, bool autoIncrement)
+        public DTOSchemaConstraint SetPrimaryKey(string name, string sqlName = null, bool autoIncrement = false)
         {
             if (_fields.Any(x => x.Name == name)) throw new InvalidOperationException();
-            SetField(name, name, false, false, true, autoIncrement, true);
+            if (sqlName == null) sqlName = name;
+            SetField(name, sqlName, false, false, true, autoIncrement, true);
+            return this;
+        }
+        public DTOSchemaConstraint SetPrimaryKey<TType>(Expression<Func<TType, object>> expression, string sqlName = null, bool autoIncrement = false) where TType : class
+        {
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
+            if (Helpers.Expression.TryGetMemberName(expression, out var name))
+            {
+                return SetPrimaryKey(name, sqlName, autoIncrement);
+            }
             return this;
         }
         private DTOSchemaConstraint SetField(string name, string sqlName, bool ignoreInsert = false, bool ignoreUpdate = false, bool isPrimaryKey = false, bool isAutoIncrement = false, bool isNotNull = false)
@@ -68,6 +79,15 @@ namespace RDapter.Entities
         {
             if (_fields.Any(x => x.Name == name)) throw new InvalidOperationException();
             _fields.Add(new FieldConstraint(name, sqlName, ignoreInsert, ignoreUpdate, isNotNull: isNotNull));
+            return this;
+        }
+        public DTOSchemaConstraint SetField<TType>(Expression<Func<TType, object>> expression, string sqlName, bool ignoreInsert = false, bool ignoreUpdate = false, bool isNotNull = false)
+        {
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
+            if (Helpers.Expression.TryGetMemberName(expression, out var name))
+            {
+                return SetField(name, sqlName, ignoreInsert, ignoreUpdate, isNotNull);
+            }
             return this;
         }
         public FieldConstraint GetField(string name)

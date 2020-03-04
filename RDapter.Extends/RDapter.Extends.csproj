@@ -5,6 +5,12 @@
     <LangVersion>8.0</LangVersion>
     <Nullable>Enable</Nullable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReleaseNotes>First release.</PackageReleaseNotes>
+    <Description>RDapter.Extends, an extension CRUD built on top of RDapter.</Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <Copyright>Copyright © Chanvut Booneid 2020</Copyright>
+    <Authors>Chanvut Booneid</Authors>
+    <RepositoryUrl>https://github.com/Desz01ate/RDapter</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

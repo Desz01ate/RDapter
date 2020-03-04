@@ -3,19 +3,26 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
-    <Version>1.0.0.0</Version>
-    <PackageReleaseNotes>Release version.</PackageReleaseNotes>
+    <Version>1.0.0.1</Version>
+    <PackageReleaseNotes>Add DTOSchemaConstraint overloads for better quality of life when using with Entity Framework.</PackageReleaseNotes>
     <PackageId>RDapter</PackageId>
     <Authors>Chanvut Booneid</Authors>
+    <Copyright>Copyright © Chanvut Booneid 2020</Copyright>
     <Product>RDapter</Product>
     <Nullable>Enable</Nullable>
     <Description>A Relational database extension aDapter. A minimal, high performance micro-orm.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Desz01ate/RDapter</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
     <DocumentationFile>D:\Documents\GitHub\RDapter\RDapter.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|NET45|AnyCPU'">
+    <DocumentationFile>D:\Documents\GitHub\RDapter\RDapter\RDapter.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,5 +34,12 @@
   <ItemGroup>
     <Compile Remove="DataBuilder\Helper\AttributeValidator.cs" />
   </ItemGroup>
+
+  <!--<ItemGroup Condition="'$(TargetFramework)' == 'NET45'">
+    <PackageReference Include="System.Data.Common">
+      <Version>4.0.0</Version>
+    </PackageReference>
+  </ItemGroup>-->
+
 
 </Project>

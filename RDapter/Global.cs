@@ -6,6 +6,9 @@ using System.Text;
 
 namespace RDapter
 {
+    /// <summary>
+    /// Global configuration for schema mapping.
+    /// </summary>
     public static partial class Global
     {
         private static Dictionary<Type, DTOSchemaConstraint> defaultMapConstraint = new Dictionary<Type, DTOSchemaConstraint>();

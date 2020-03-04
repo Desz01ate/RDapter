@@ -117,6 +117,11 @@
             Proxy for PropertyInfo for customizable property for internal use only.
             </summary>
         </member>
+        <member name="T:RDapter.Global">
+            <summary>
+            Global configuration for schema mapping.
+            </summary>
+        </member>
         <member name="T:RDapter.Mapper">
             <summary>
             Default mapper execute-methods collection.
