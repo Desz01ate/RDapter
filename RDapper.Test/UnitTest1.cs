@@ -33,7 +33,7 @@ namespace RDapter.Test
             RDapter.Global.SetSchemaConstraint<TestTable>(constraint =>
             {
                 constraint.SetTableName("TestTable");
-                constraint.SetPrimaryKey("id", false);
+                constraint.SetPrimaryKey("id", autoIncrement: false);
             });
         }
 

@@ -110,7 +110,7 @@ namespace RDapter.Extends
             var preparer = connector.InsertQueryGenerate<T>(obj);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction);
             var result = connector.ExecuteNonQuery(ec);
             return result;
         }
@@ -132,7 +132,7 @@ namespace RDapter.Extends
             var preparer = connector.InsertQueryGenerate<T>(obj);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction);
 
             var result = connector.ExecuteNonQuery(ec);
             return result;
@@ -154,7 +154,7 @@ namespace RDapter.Extends
             var preparer = connector.UpdateQueryGenerate<T>(obj);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction);
             var value = connector.ExecuteNonQuery(ec);
             return value;
         }
@@ -175,7 +175,7 @@ namespace RDapter.Extends
             var preparer = connector.DeleteQueryGenerate<T>(obj);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction);
 
             var result = connector.ExecuteNonQuery(ec);
             return result;
@@ -275,7 +275,7 @@ namespace RDapter.Extends
             var preparer = connector.InsertQueryGenerate<T>(obj);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction);
 
             var result = await connector.ExecuteNonQueryAsync(ec).ConfigureAwait(false);
             return result;
@@ -296,7 +296,7 @@ namespace RDapter.Extends
             var preparer = connector.InsertQueryGenerate<T>(obj);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction);
 
             var result = await connector.ExecuteNonQueryAsync(ec).ConfigureAwait(false);
             return result;
@@ -318,7 +318,7 @@ namespace RDapter.Extends
             var preparer = connector.UpdateQueryGenerate<T>(obj);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction);
 
             var result = await connector.ExecuteNonQueryAsync(ec).ConfigureAwait(false);
             return result;
@@ -340,7 +340,7 @@ namespace RDapter.Extends
             var preparer = connector.DeleteQueryGenerate<T>(obj);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction);
 
             var result = await connector.ExecuteNonQueryAsync(ec).ConfigureAwait(false);
             return result;
@@ -363,7 +363,7 @@ namespace RDapter.Extends
             var preparer = connector.SelectQueryGenerate<T>(predicate, top);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: buffered);
 
             var result = connector.ExecuteReader<T>(ec);
             return result;
@@ -384,7 +384,7 @@ namespace RDapter.Extends
             var preparer = connector.DeleteQueryGenerate<T>(predicate);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction);
             return connector.ExecuteNonQuery(ec);
         }
 
@@ -405,7 +405,7 @@ namespace RDapter.Extends
             var preparer = connector.SelectQueryGenerate<T>(predicate, top);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: buffered);
             var result = await connector.ExecuteReaderAsync<T>(ec).ConfigureAwait(false);
             return result;
         }
@@ -424,7 +424,7 @@ namespace RDapter.Extends
             var preparer = connector.DeleteQueryGenerate<T>(predicate);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction);
             return await connector.ExecuteNonQueryAsync(ec).ConfigureAwait(false);
         }
 
@@ -443,7 +443,7 @@ namespace RDapter.Extends
             var preparer = connector.DeleteQueryGenerate<T>(primaryKey);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction);
             return connector.ExecuteNonQuery(ec);
         }
 
@@ -462,7 +462,7 @@ namespace RDapter.Extends
             var preparer = connector.DeleteQueryGenerate<T>(primaryKey);
             var query = preparer.query;
             var parameters = preparer.parameters;
-            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction, buffered: false);
+            var ec = new ExecutionCommand(query, parameters, System.Data.CommandType.Text, transaction);
             return await connector.ExecuteNonQueryAsync(ec).ConfigureAwait(false);
         }
 
@@ -513,7 +513,7 @@ namespace RDapter.Extends
             var exprTranslator = new ExpressionTranslator<T>();
             var translateResult = exprTranslator.Translate(predicate);
             var query = $"SELECT COUNT(*) FROM {tableName} WHERE {translateResult.Expression}";
-            var ec = new ExecutionCommand(query, translateResult.Parameters, System.Data.CommandType.Text, null, buffered: false);
+            var ec = new ExecutionCommand(query, translateResult.Parameters, System.Data.CommandType.Text, null);
 
             var count = connector.ExecuteScalar(ec);
             var countAsString = count.ToString();
@@ -533,7 +533,7 @@ namespace RDapter.Extends
             var exprTranslator = new ExpressionTranslator<T>();
             var translateResult = exprTranslator.Translate(predicate);
             var query = $"SELECT COUNT(*) FROM {tableName} WHERE {translateResult.Expression}";
-            var ec = new ExecutionCommand(query, translateResult.Parameters, System.Data.CommandType.Text, null, buffered: false);
+            var ec = new ExecutionCommand(query, translateResult.Parameters, System.Data.CommandType.Text, null);
 
             var count = await connector.ExecuteScalarAsync(ec).ConfigureAwait(false);
             var countAsString = count.ToString();

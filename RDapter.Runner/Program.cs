@@ -43,7 +43,7 @@ namespace RDapter.Runner
             RDapter.Global.SetSchemaConstraint<taxifaretrain>((constraint) =>
             {
                 //constraint.SetField(nameof(taxifaretrain.vendorid), "vendor_id", true, true);
-                constraint.SetTableName("[taxi-fare-train]");
+                //constraint.SetTableName("[taxi-fare-train]");
                 constraint.SetField<taxifaretrain>(x => x.vendorid, "vendor_id");
             });
             var constraint = RDapter.Global.GetSchemaConstraint<taxifaretrain>();
