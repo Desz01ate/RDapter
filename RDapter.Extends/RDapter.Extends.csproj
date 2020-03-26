@@ -5,13 +5,13 @@
     <LangVersion>8.0</LangVersion>
     <Nullable>Enable</Nullable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>Fix bugs for QueryFirst and QueryFirstAsync.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix 'buffered' parameter being hard-coded.</PackageReleaseNotes>
     <Description>RDapter.Extends, an extension CRUD built on top of RDapter.</Description>
     <PackageProjectUrl></PackageProjectUrl>
     <Copyright>Copyright © Chanvut Booneid 2020</Copyright>
     <Authors>Chanvut Booneid</Authors>
     <RepositoryUrl>https://github.com/Desz01ate/RDapter</RepositoryUrl>
-    <Version>1.0.0.1</Version>
+    <Version>1.0.0.2</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
