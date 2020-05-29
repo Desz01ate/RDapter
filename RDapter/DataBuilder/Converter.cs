@@ -39,9 +39,8 @@ namespace RDapter.DataBuilder
                 //var property = properties.FirstOrDefault(x => x.Name == column.name);
                 var constraint = Global.GetSchemaConstraint<T>();
                 var property = properties.SingleOrDefault(x => column.name == constraint.GetField(x.Name).SqlName);
-                if (property == null)
+                if (property == null || !property.CanWrite)
                     continue;
-
                 var index = Expression.Constant(column.index);
                 // equivalent to datareader[(int)readerIndex] where datareader is incoming parameter.
                 var value = Expression.MakeIndex(dataReaderParameter, indexerInfo, new[] { index });
