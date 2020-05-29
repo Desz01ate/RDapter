@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
-    <Version>1.0.0.1</Version>
+    <Version>1.0.0.2-beta-1</Version>
     <PackageReleaseNotes>Add DTOSchemaConstraint overloads for better quality of life when using with Entity Framework.</PackageReleaseNotes>
     <PackageId>RDapter</PackageId>
     <Authors>Chanvut Booneid</Authors>
