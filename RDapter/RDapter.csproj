@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <Version>1.0.0.2-beta-1</Version>
-    <PackageReleaseNotes>Add DTOSchemaConstraint overloads for better quality of life when using with Entity Framework.</PackageReleaseNotes>
+    <PackageReleaseNotes>Add condition that compiler should only take writeable property.</PackageReleaseNotes>
     <PackageId>RDapter</PackageId>
     <Authors>Chanvut Booneid</Authors>
     <Copyright>Copyright © Chanvut Booneid 2020</Copyright>
