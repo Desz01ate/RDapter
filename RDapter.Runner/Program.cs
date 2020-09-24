@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 using BenchmarkDotNet.Attributes;
 using Dapper;
 using RDapter;
@@ -13,25 +13,26 @@ namespace RDapter.Runner
     [MemoryDiagnoser]
     public class Test
     {
+        private const string ConnectionString = "Filename=:memory:";
         [Benchmark]
         public List<taxifaretrain> Dapper1()
         {
-            using var connection = new SqlConnection("server=localhost;database=local;user=sa;password=sa;");
-            var res = connection.Query<taxifaretrain>("SELECT TOP(10000) * FROM [taxi-fare-train]").AsList();
+            using var connection = new SqliteConnection(ConnectionString);
+            var res = connection.Query<taxifaretrain>("SELECT * FROM data").AsList();
             return res;
 
         }
         [Benchmark]
         public List<taxifaretrain> RDapter1()
         {
-            using var connection = new SqlConnection("server=localhost;database=local;user=sa;password=sa;");
-            var res = connection.ExecuteReader<taxifaretrain>("SELECT TOP(10000) * FROM [taxi-fare-train]").AsList();
+            using var connection = new SqliteConnection(ConnectionString);
+            var res = connection.ExecuteReader<taxifaretrain>("SELECT * FROM data").AsList();
             return res;
         }
         [Benchmark]
         public List<taxifaretrain> RDapterExtends()
         {
-            using var connection = new SqlConnection("server=localhost;database=local;user=sa;password=sa;");
+            using var connection = new SqliteConnection(ConnectionString);
             var res = RDapter.Extends.Mapper.Query<taxifaretrain>(connection, top: 10000).AsList();
             return res;
         }
@@ -40,11 +41,9 @@ namespace RDapter.Runner
     {
         static void Main(string[] args)
         {
-            RDapter.Global.SetSchemaConstraint<taxifaretrain>((constraint) =>
+            RDapter.Global.SetBuilderFor<taxifaretrain>((constraint) =>
             {
-                //constraint.SetField(nameof(taxifaretrain.vendorid), "vendor_id", true, true);
-                //constraint.SetTableName("[taxi-fare-train]");
-                constraint.SetField<taxifaretrain>(x => x.vendorid, "vendor_id");
+                constraint.Property(x => x.fare_amount).IsPrimaryKey().IsRequired().HasName("");
             });
             var constraint = RDapter.Global.GetSchemaConstraint<taxifaretrain>();
             var test = new Test();

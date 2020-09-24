@@ -9,7 +9,7 @@ namespace RDapter.Helpers
 {
     internal static class Expression
     {
-        internal static bool TryGetMemberName<TType>(Expression<Func<TType, object>> expression, out string? memberName)
+        internal static bool TryGetMemberName<TType>(Expression<Func<TType, object>> expression, out string memberName)
         {
             //**explicit cast to get exception throw!**
             if (expression.Body is UnaryExpression unaryExpression)
@@ -25,7 +25,7 @@ namespace RDapter.Helpers
                 memberName = v2;
                 return true;
             }
-            memberName = null;
+            memberName = string.Empty;
             return false;
         }
         private static bool GetMemberExpression(MemberExpression expression, out string? memberName)
